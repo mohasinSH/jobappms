@@ -1,6 +1,6 @@
 package com.exbarkx.jobms.job;
 
-import com.exbarkx.jobms.job.dto.JobWithCompanyDTO;
+import com.exbarkx.jobms.job.dto.JobDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ public class JobController {
         this.jobService = jobService;
     }
     @GetMapping
-    public ResponseEntity<List<JobWithCompanyDTO>> findAll(){
+    public ResponseEntity<List<JobDTO>> findAll(){
         return ResponseEntity.ok(jobService.findAll());
     }
     @PostMapping
@@ -25,8 +25,8 @@ public class JobController {
         return new ResponseEntity<>("Job added sucessfully",HttpStatus.CREATED);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Job> getJobById(@PathVariable Long id){
-        Job job = jobService.getJobById(id);
+    public ResponseEntity<JobDTO> getJobById(@PathVariable Long id){
+        JobDTO job = jobService.getJobById(id);
         if(job == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

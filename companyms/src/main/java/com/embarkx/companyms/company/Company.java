@@ -17,7 +17,6 @@ public class Company {
 //    private List<Job> jobs;
 //    @OneToMany(mappedBy = "company")
 //    private List<Review> reviews;
-
 //    public List<Review> getReviews() {
 //        return reviews;
 //    }
