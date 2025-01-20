@@ -8,11 +8,11 @@
 		<version>3.4.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.exbarkx</groupId>
-	<artifactId>jobms</artifactId>
+	<groupId>com.embarkx</groupId>
+	<artifactId>companyms</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>jobms</name>
-	<description>microservice for job application</description>
+	<name>companyms</name>
+	<description>Microserivce for companyms </description>
 	<url/>
 	<licenses>
 		<license/>

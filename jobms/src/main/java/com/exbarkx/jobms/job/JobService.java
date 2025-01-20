@@ -1,9 +1,11 @@
 package com.exbarkx.jobms.job;
 
+import com.exbarkx.jobms.job.dto.JobWithCompanyDTO;
+
 import java.util.List;
 
 public interface JobService {
-    List<Job> findAll();
+    List<JobWithCompanyDTO> findAll();
     void createJob(Job job);
 
     Job getJobById(Long id);

@@ -1,5 +1,6 @@
 package com.exbarkx.jobms.job;
 
+import com.exbarkx.jobms.job.dto.JobWithCompanyDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ public class JobController {
         this.jobService = jobService;
     }
     @GetMapping
-    public ResponseEntity<List<Job>> findAll(){
+    public ResponseEntity<List<JobWithCompanyDTO>> findAll(){
         return ResponseEntity.ok(jobService.findAll());
     }
     @PostMapping
