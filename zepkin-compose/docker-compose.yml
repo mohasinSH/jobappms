@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  zipkin:
+    image: openzipkin/zipkin:latest
+    container_name: zipkin_container
+    ports:
+      - "9411:9411" # Default port for Zipkin UI and API
+    environment:
+      - STORAGE_TYPE=mem # In-memory storage (default)
+    restart: unless-stopped
