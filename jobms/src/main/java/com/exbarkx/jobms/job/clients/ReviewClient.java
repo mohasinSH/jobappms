@@ -13,3 +13,5 @@ public interface ReviewClient {
     @GetMapping("/reviews")
     List<Review> getReviews(@RequestParam("companyId") Long id);
 }
+
+
