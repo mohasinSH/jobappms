@@ -8,6 +8,8 @@ import com.exbarkx.jobms.job.dto.JobDTO;
 import com.exbarkx.jobms.job.external.Company;
 import com.exbarkx.jobms.job.external.Review;
 import com.exbarkx.jobms.job.mapper.JobMapper;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -23,6 +25,7 @@ import java.util.stream.Collectors;
 public class JobServiceImpl implements JobService {
 //    private List<Job> jobs = new ArrayList<Job>();
     JobRepository jobRepository;
+    int attempt=0;
 //    private Long nextId = 1l;
     private ReviewClient reviewClient;
     private CompanyClient companyClient;
@@ -35,12 +38,20 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
+//    @CircuitBreaker(name="companyBreaker",fallbackMethod = "companyBreakerFallback")
+    @Retry(name="companyBreaker",fallbackMethod = "companyBreakerFallback")
     public List<JobDTO> findAll() {
+        System.out.println("Attempt"+ ++attempt);
         List<Job> jobs = jobRepository.findAll();
+
         List<JobDTO> jobDTOS = new ArrayList<>();
         return jobs.stream().map(this::convertToDto).collect(Collectors.toList());
     }
-
+    public List<String> companyBreakerFallback(Exception e){
+        List<String> list = new ArrayList<>();
+        list.add("Dummy");
+        return list;
+    }
     private JobDTO convertToDto(Job job){
     //            RestTemplate restTemplate = new RestTemplate();
 //                Company company = restTemplate.getForObject("http://COMPANYMS:8082/companies/"+job.getCompanyId(), Company.class);
